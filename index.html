@@ -20,9 +20,37 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=Inter:wght@400;500;600&amp;family=Allison&amp;display=swap">
 <style>
+/* site navigation: sticky bar + mobile menu */
+.site-nav{transition:background .25s ease, box-shadow .25s ease}
+.site-nav.is-fixed{position:fixed !important;top:0;left:0;right:0;z-index:60;max-width:none !important;padding-top:10px !important;padding-bottom:10px !important;padding-left:max(24px, calc((100vw - 1240px) / 2 + 24px)) !important;padding-right:max(24px, calc((100vw - 1240px) / 2 + 24px)) !important;background:rgba(27,30,25,0.94);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);box-shadow:0 1px 0 rgba(250,247,241,0.12);animation:navIn .25s ease}
+.site-nav.is-fixed .logo-b{font-size:24px !important}
+@keyframes navIn{from{transform:translateY(-100%)}to{transform:none}}
+@media (prefers-reduced-motion:reduce){.site-nav.is-fixed{animation:none}}
+.nav-toggle{display:none;align-items:center;justify-content:center;width:44px;height:44px;padding:0;border:0;background:none;color:#FAF7F1;cursor:pointer;border-radius:8px}
+.nav-toggle:focus-visible{outline:2px solid #E3B07A;outline-offset:2px}
+.nav-toggle .bars,.nav-toggle .bars::before,.nav-toggle .bars::after{display:block;width:22px;height:2px;background:currentColor;border-radius:2px;position:relative;transition:transform .2s ease, background .2s ease}
+.nav-toggle .bars::before,.nav-toggle .bars::after{content:"";position:absolute;left:0}
+.nav-toggle .bars::before{top:-7px}.nav-toggle .bars::after{top:7px}
+.site-nav.open .nav-toggle .bars{background:transparent}
+.site-nav.open .nav-toggle .bars::before{transform:translateY(7px) rotate(45deg)}
+.site-nav.open .nav-toggle .bars::after{transform:translateY(-7px) rotate(-45deg)}
+@media (max-width:860px){
+ .site-nav{gap:8px 12px !important;padding-top:16px !important;padding-bottom:16px !important}
+ .site-nav .logo{margin-right:auto}
+ .site-nav .nav-right{display:contents !important}
+ .site-nav .nav-toggle{display:inline-flex;order:3}
+ .site-nav .nav-book{order:2;padding:0 16px !important;font-size:14px}
+ .site-nav .nav-links{display:none !important;order:10;flex-basis:100%;flex-direction:column;align-items:flex-start !important;gap:0 !important;padding:8px 0 4px;border-top:1px solid rgba(250,247,241,0.18)}
+ .site-nav .nav-links a{display:flex;align-items:center;min-height:48px;font-size:17px}
+ .site-nav [role="group"]{order:11;display:none !important;flex-basis:100%;padding-bottom:8px}
+ .site-nav.open{background:rgba(27,30,25,0.96)}
+ .site-nav.open .nav-links{display:flex !important}
+ .site-nav.open [role="group"]{display:flex !important}
+}
+
 body{margin:0;background:#FAF7F1}
 html{scroll-behavior:smooth}
-[id]{scroll-margin-top:16px}
+[id]{scroll-margin-top:84px}
 img{max-width:100%}
 a{color:#9C5B22}a:hover{color:#7A4518}
 #lb[hidden],#nl-form[hidden]{display:none !important}
@@ -59,19 +87,22 @@ a{color:#9C5B22}a:hover{color:#7A4518}
 <img src="images/hero-walk-2026.jpg" alt="A small group walking single file through golden grass into the Okavango Delta at sunrise" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 55%">
 <div aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,24,18,0.55) 0%, rgba(20,24,18,0.15) 30%, rgba(20,24,18,0.35) 60%, rgba(20,24,18,0.85) 100%)"></div>
 
-<nav aria-label="Main" style="position: relative; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px; max-width: 1240px; width: 100%; box-sizing: border-box; margin: 0 auto; padding: 28px 24px">
-<a href="#top" style="display: flex; flex-direction: column; line-height: 1; color: #FAF7F1; text-decoration: none">
+<nav class="site-nav" aria-label="Main" style="position: relative; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px; max-width: 1240px; width: 100%; box-sizing: border-box; margin: 0 auto; padding: 28px 24px">
+<a class="logo" href="#top" style="display: flex; flex-direction: column; line-height: 1; color: #FAF7F1; text-decoration: none">
 <span style="font-size: 11px; letter-spacing: 0.21em; margin-right: -0.21em; font-weight: 500">DISCOVER YOUR</span>
-<span style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 30px; font-weight: 500; letter-spacing: 0.02em; margin-top: 4px">Wild Self</span>
+<span class="logo-b" style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 30px; font-weight: 500; letter-spacing: 0.02em; margin-top: 4px">Wild Self</span>
 </a>
-<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 28px; font-size: 15px">
+<div class="nav-right" style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 28px; font-size: 15px">
+<div class="nav-links" id="nav-links" style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 28px">
 <a href="#for-you" style="color: #FAF7F1; text-decoration: none">The trail</a>
 <a href="#programme" style="color: #FAF7F1; text-decoration: none">Programme</a>
 <a href="#guides" style="color: #FAF7F1; text-decoration: none">Your guides</a>
 <a href="#investment" style="color: #FAF7F1; text-decoration: none">Investment</a>
 <a href="#faq" style="color: #FAF7F1; text-decoration: none">FAQ</a>
+</div>
 <div role="group" aria-label="Language" style="display: flex; align-items: center; gap: 2px; font-size: 14px; font-weight: 600; letter-spacing: 0.06em"><span aria-current="true" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 4px; color: #FAF7F1; text-decoration: underline; text-underline-offset: 5px">EN</span><span aria-hidden="true" style="color: rgba(250,247,241,0.45)">|</span><a href="nl/" lang="nl" hreflang="nl" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 4px; color: rgba(250,247,241,0.75); text-decoration: none">NL</a></div>
-<a href="https://calendly.com/rdegaayfortman/discovery-call" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px; border: 1px solid rgba(250,247,241,0.7); border-radius: 999px; color: #FAF7F1; text-decoration: none; font-weight: 500">Book a call</a>
+<a class="nav-book" href="https://calendly.com/rdegaayfortman/discovery-call" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px; border: 1px solid rgba(250,247,241,0.7); border-radius: 999px; color: #FAF7F1; text-decoration: none; font-weight: 500">Book a call</a>
+<button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Menu"><span class="bars" aria-hidden="true"></span></button>
 </div>
 </nav>
 
@@ -481,6 +512,22 @@ a{color:#9C5B22}a:hover{color:#7A4518}
   document.getElementById('lb-next').onclick=function(){show(i+1);};
   lb.addEventListener('click',function(e){if(e.target===lb)close();});
   document.addEventListener('keydown',function(e){if(lb.hidden)return;if(e.key==='Escape')close();if(e.key==='ArrowLeft')show(i-1);if(e.key==='ArrowRight')show(i+1);});
+})();
+</script>
+<script>
+(function(){
+  var nav=document.querySelector('.site-nav'); if(!nav) return;
+  var header=nav.parentNode, btn=nav.querySelector('.nav-toggle'), ph=0;
+  function setOpen(o){nav.classList.toggle('open',o);btn.setAttribute('aria-expanded',o?'true':'false');}
+  btn.addEventListener('click',function(){setOpen(!nav.classList.contains('open'));});
+  nav.querySelectorAll('.nav-links a').forEach(function(a){a.addEventListener('click',function(){setOpen(false);});});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&nav.classList.contains('open')){setOpen(false);btn.focus();}});
+  function onScroll(){
+    var fix=window.scrollY>Math.max(160,header.offsetHeight*0.5);
+    if(fix&&!nav.classList.contains('is-fixed')){ph=nav.offsetHeight;header.style.paddingTop=ph+'px';nav.classList.add('is-fixed');}
+    else if(!fix&&nav.classList.contains('is-fixed')){nav.classList.remove('is-fixed');header.style.paddingTop='';}
+  }
+  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
 })();
 </script>
 </body>
