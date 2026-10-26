@@ -1,0 +1,3 @@
+<Files "sender-config.php">
+  Require all denied
+</Files>
