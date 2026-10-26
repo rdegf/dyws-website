@@ -20,12 +20,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=Inter:wght@400;500;600&amp;family=Allison&amp;display=swap">
 <style>
-/* site navigation: sticky bar + mobile menu */
+/* site navigation: mobile menu */
 .site-nav{transition:background .25s ease, box-shadow .25s ease}
-.site-nav.is-fixed{position:fixed !important;top:0;left:0;right:0;z-index:60;max-width:none !important;padding-top:10px !important;padding-bottom:10px !important;padding-left:max(24px, calc((100vw - 1240px) / 2 + 24px)) !important;padding-right:max(24px, calc((100vw - 1240px) / 2 + 24px)) !important;background:rgba(27,30,25,0.94);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);box-shadow:0 1px 0 rgba(250,247,241,0.12);animation:navIn .25s ease}
-.site-nav.is-fixed .logo-b{font-size:24px !important}
-@keyframes navIn{from{transform:translateY(-100%)}to{transform:none}}
-@media (prefers-reduced-motion:reduce){.site-nav.is-fixed{animation:none}}
 .nav-toggle{display:none;align-items:center;justify-content:center;width:44px;height:44px;padding:0;border:0;background:none;color:#FAF7F1;cursor:pointer;border-radius:8px}
 .nav-toggle:focus-visible{outline:2px solid #E3B07A;outline-offset:2px}
 .nav-toggle .bars,.nav-toggle .bars::before,.nav-toggle .bars::after{display:block;width:22px;height:2px;background:currentColor;border-radius:2px;position:relative;transition:transform .2s ease, background .2s ease}
@@ -50,7 +46,7 @@
 
 body{margin:0;background:#FAF7F1}
 html{scroll-behavior:smooth}
-[id]{scroll-margin-top:84px}
+[id]{scroll-margin-top:16px}
 img{max-width:100%}
 a{color:#9C5B22}a:hover{color:#7A4518}
 #lb[hidden],#nl-form[hidden]{display:none !important}
@@ -517,17 +513,11 @@ a{color:#9C5B22}a:hover{color:#7A4518}
 <script>
 (function(){
   var nav=document.querySelector('.site-nav'); if(!nav) return;
-  var header=nav.parentNode, btn=nav.querySelector('.nav-toggle'), ph=0;
+  var btn=nav.querySelector('.nav-toggle');
   function setOpen(o){nav.classList.toggle('open',o);btn.setAttribute('aria-expanded',o?'true':'false');}
   btn.addEventListener('click',function(){setOpen(!nav.classList.contains('open'));});
   nav.querySelectorAll('.nav-links a').forEach(function(a){a.addEventListener('click',function(){setOpen(false);});});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&nav.classList.contains('open')){setOpen(false);btn.focus();}});
-  function onScroll(){
-    var fix=window.scrollY>Math.max(160,header.offsetHeight*0.5);
-    if(fix&&!nav.classList.contains('is-fixed')){ph=nav.offsetHeight;header.style.paddingTop=ph+'px';nav.classList.add('is-fixed');}
-    else if(!fix&&nav.classList.contains('is-fixed')){nav.classList.remove('is-fixed');header.style.paddingTop='';}
-  }
-  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
 })();
 </script>
 </body>
