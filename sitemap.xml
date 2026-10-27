@@ -18,4 +18,16 @@
     <loc>https://discoveryourwildself.com/terms-and-conditions/</loc>
     <lastmod>2026-10-27</lastmod>
   </url>
+  <url>
+    <loc>https://discoveryourwildself.com/privacy/</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://discoveryourwildself.com/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://discoveryourwildself.com/nl/privacy/"/>
+  </url>
+  <url>
+    <loc>https://discoveryourwildself.com/nl/privacy/</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://discoveryourwildself.com/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://discoveryourwildself.com/nl/privacy/"/>
+  </url>
 </urlset>
