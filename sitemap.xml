@@ -2,32 +2,62 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://discoveryourwildself.com/</loc>
-    <lastmod>2026-10-27</lastmod>
+    <lastmod>2026-10-29</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://discoveryourwildself.com/"/>
     <xhtml:link rel="alternate" hreflang="nl" href="https://discoveryourwildself.com/nl/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://discoveryourwildself.com/"/>
   </url>
   <url>
     <loc>https://discoveryourwildself.com/nl/</loc>
-    <lastmod>2026-10-27</lastmod>
+    <lastmod>2026-10-29</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://discoveryourwildself.com/"/>
     <xhtml:link rel="alternate" hreflang="nl" href="https://discoveryourwildself.com/nl/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://discoveryourwildself.com/"/>
-  </url>
-  <url>
-    <loc>https://discoveryourwildself.com/terms-and-conditions/</loc>
-    <lastmod>2026-10-27</lastmod>
   </url>
   <url>
     <loc>https://discoveryourwildself.com/privacy/</loc>
     <lastmod>2026-10-27</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://discoveryourwildself.com/privacy/"/>
     <xhtml:link rel="alternate" hreflang="nl" href="https://discoveryourwildself.com/nl/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://discoveryourwildself.com/privacy/"/>
   </url>
   <url>
     <loc>https://discoveryourwildself.com/nl/privacy/</loc>
     <lastmod>2026-10-27</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://discoveryourwildself.com/privacy/"/>
     <xhtml:link rel="alternate" hreflang="nl" href="https://discoveryourwildself.com/nl/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://discoveryourwildself.com/privacy/"/>
+  </url>
+  <url>
+    <loc>https://discoveryourwildself.com/stories/</loc>
+    <lastmod>2026-10-29</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://discoveryourwildself.com/stories/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://discoveryourwildself.com/nl/verhalen/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://discoveryourwildself.com/stories/"/>
+  </url>
+  <url>
+    <loc>https://discoveryourwildself.com/nl/verhalen/</loc>
+    <lastmod>2026-10-29</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://discoveryourwildself.com/stories/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://discoveryourwildself.com/nl/verhalen/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://discoveryourwildself.com/stories/"/>
+  </url>
+  <url>
+    <loc>https://discoveryourwildself.com/stories/slow-down-to-speed-up/</loc>
+    <lastmod>2026-10-29</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://discoveryourwildself.com/stories/slow-down-to-speed-up/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://discoveryourwildself.com/nl/verhalen/vertragen-om-te-versnellen/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://discoveryourwildself.com/stories/slow-down-to-speed-up/"/>
+  </url>
+  <url>
+    <loc>https://discoveryourwildself.com/nl/verhalen/vertragen-om-te-versnellen/</loc>
+    <lastmod>2026-10-29</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://discoveryourwildself.com/stories/slow-down-to-speed-up/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://discoveryourwildself.com/nl/verhalen/vertragen-om-te-versnellen/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://discoveryourwildself.com/stories/slow-down-to-speed-up/"/>
+  </url>
+  <url>
+    <loc>https://discoveryourwildself.com/terms-and-conditions/</loc>
+    <lastmod>2026-10-27</lastmod>
   </url>
 </urlset>
