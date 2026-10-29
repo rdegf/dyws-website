@@ -57,15 +57,29 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://discoveryourwildself.com/stories/someday/"/>
   </url>
   <url>
-    <loc>https://discoveryourwildself.com/stories/slow-down-to-speed-up/</loc>
+    <loc>https://discoveryourwildself.com/stories/the-circle-of-life/</loc>
     <lastmod>2026-09-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://discoveryourwildself.com/stories/the-circle-of-life/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://discoveryourwildself.com/nl/verhalen/de-cirkel-van-het-leven/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://discoveryourwildself.com/stories/the-circle-of-life/"/>
+  </url>
+  <url>
+    <loc>https://discoveryourwildself.com/nl/verhalen/de-cirkel-van-het-leven/</loc>
+    <lastmod>2026-09-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://discoveryourwildself.com/stories/the-circle-of-life/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://discoveryourwildself.com/nl/verhalen/de-cirkel-van-het-leven/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://discoveryourwildself.com/stories/the-circle-of-life/"/>
+  </url>
+  <url>
+    <loc>https://discoveryourwildself.com/stories/slow-down-to-speed-up/</loc>
+    <lastmod>2026-08-03</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://discoveryourwildself.com/stories/slow-down-to-speed-up/"/>
     <xhtml:link rel="alternate" hreflang="nl" href="https://discoveryourwildself.com/nl/verhalen/vertragen-om-te-versnellen/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://discoveryourwildself.com/stories/slow-down-to-speed-up/"/>
   </url>
   <url>
     <loc>https://discoveryourwildself.com/nl/verhalen/vertragen-om-te-versnellen/</loc>
-    <lastmod>2026-09-15</lastmod>
+    <lastmod>2026-08-03</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://discoveryourwildself.com/stories/slow-down-to-speed-up/"/>
     <xhtml:link rel="alternate" hreflang="nl" href="https://discoveryourwildself.com/nl/verhalen/vertragen-om-te-versnellen/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://discoveryourwildself.com/stories/slow-down-to-speed-up/"/>
