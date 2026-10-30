@@ -56,6 +56,12 @@ $summary = "{$L[0]}: $name\n{$L[1]}: $email\n{$L[2]}: {$f['phone']}\n{$L[3]}: {$
 if ($f['booking_as'] === 'company') {
   $summary .= "{$L[7]}: {$f['company_name']}\n{$L[8]}: {$f['company_address']}\n{$L[9]}: {$f['vat_number']}\n";
 }
+$early = time() < strtotime('2027-01-01 00:00:00');
+$price = $f['booking_as'] === 'company'
+  ? ($early ? '€4,250 excl. VAT (early bird)' : '€4,750 excl. VAT')
+  : ($early ? '€4,695 incl. VAT (early bird)' : '€5,195 incl. VAT');
+if ($nl) { $price = strtr($price, ['4,250' => '4.250', '4,750' => '4.750', '4,695' => '4.695', '5,195' => '5.195', 'excl. VAT' => 'excl. btw', 'incl. VAT' => 'incl. btw']); }
+$summary .= ($nl ? 'Prijs' : 'Price') . ": $price\n";
 $summary .= "\n{$L[10]}: 18-26 April 2027, Okavango Delta, Botswana\n{$L[11]}: {$f['discovery_call']}\n{$L[12]}: {$f['heard']}\n\n"
   . "{$L[13]}:\n{$f['why']}\n\n{$L[14]}: {$f['intention']}\n\n{$L[15]}:\n{$f['experience']}\n\n{$L[16]}:\n{$f['concerns']}\n\n{$L[17]}:\n{$f['other']}\n\n"
   . $L[18] . ': ' . $yn(yes('accept_terms')) . "\n" . $L[19] . ': ' . $yn(yes('accept_binding')) . "\n"

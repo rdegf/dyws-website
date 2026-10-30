@@ -87,7 +87,7 @@ button.go:hover{background:#7A4518}
 <div class="err" id="err" role="alert">Something went wrong while sending your booking. Please try again, or e-mail us at <a href="mailto:hello@discoveryourwildself.com">hello@discoveryourwildself.com</a>.</div>
 <section class="box" aria-labelledby="sumh">
 <h2 id="sumh">Your booking at a glance</h2>
-<ul><li>Discover Your Wild Self trail, Okavango Delta, Botswana, 18–26 April 2027. Max. 8 participants; the trail goes ahead from 4.</li><li>Price per person: €4,250 excl. VAT if booked before 31 December 2026, €4,750 excl. VAT from 1 January 2027. Your confirmation shows the total including VAT. Included: intake and integration session, 1 hotel night in Maun, 7 nights wild camping, transfers from and to Maun airport, all meals and drinks, camping gear. Not included: flights, travel and medical insurance (mandatory), personal drinks and snacks.</li><li>Payment: €750 deposit within 14 days of our confirmation, balance by 1 March 2027, via the STO Garant escrow account.</li><li>Cancellation: more than 120 days before departure €750; 120–61 days 30%; 60–45 days 60%; less than 45 days 100%. You can transfer your place to someone else up to 30 days before departure.</li><li>There is no 14-day withdrawal period for package travel. Please do not book flights until we confirm that at least 4 participants have booked.</li></ul>
+<ul><li>Discover Your Wild Self trail, Okavango Delta, Botswana, 18–26 April 2027. Max. 8 participants; the trail goes ahead from 4.</li><li>Price per person: business booking €4,250 excl. VAT before 31 December 2026 (early bird), €4,750 excl. VAT from 1 January 2027; private booking €4,695 incl. VAT (early bird) or €5,195 incl. VAT. Your confirmation shows the total you pay. Included: intake and integration session, 1 hotel night in Maun, 7 nights wild camping, transfers from and to Maun airport, all meals and drinks, camping gear. Not included: flights, travel and medical insurance (mandatory), personal drinks and snacks.</li><li>Payment: €750 deposit within 14 days of our confirmation, balance by 1 March 2027, via the STO Garant escrow account.</li><li>Cancellation: more than 120 days before departure €750; 120–61 days 30%; 60–45 days 60%; less than 45 days 100%. You can transfer your place to someone else up to 30 days before departure.</li><li>There is no 14-day withdrawal period for package travel. Please do not book flights until we confirm that at least 4 participants have booked.</li></ul>
 <details class="sif"><summary>Standard information form for package travel (EU)</summary><p>The combination of travel services offered to you is a package within the meaning of Directive (EU) 2015/2302. Therefore, you will benefit from all EU rights applying to packages. De Gaay Fortman Advies, trading as Discover Your Wild Self, will be fully responsible for the proper performance of the package as a whole. Additionally, as required by law, we will have protection in place through STO Garant to refund your payments and, where transport is included, to ensure your repatriation if we become insolvent. We accept no payments before this protection is in place.</p>
 <p><strong>Key rights under Directive (EU) 2015/2302</strong></p>
 <ul>
@@ -117,6 +117,7 @@ button.go:hover{background:#7A4518}
 <label class="f" for="country">Country</label><input type="text" id="country" name="country" maxlength="200" autocomplete="country-name" required>
 <label class="f">I am booking as</label>
 <div class="radios"><label class="choice"><input type="radio" name="booking_as" value="private" checked onchange="co()"> A private person</label><label class="choice"><input type="radio" name="booking_as" value="company" onchange="co()"> Through my employer</label></div>
+<p class="hint" id="pricenote" style="margin:8px 0 0"></p>
 <div id="company"><label class="f" for="company_name">Company name</label><input type="text" id="company_name" name="company_name" maxlength="200"><label class="f" for="company_address">Invoice address of the company</label><input type="text" id="company_address" name="company_address" maxlength="200"><label class="f" for="vat_number">VAT number <span class="opt">(optional)</span></label><input type="text" id="vat_number" name="vat_number" maxlength="200"></div>
 </fieldset>
 <fieldset><legend>2. Your booking</legend>
@@ -147,7 +148,9 @@ button.go:hover{background:#7A4518}
 <p class="lang"><a href="/nl/boeken/">Nederlands</a></p>
 </main>
 <script>
-function co(){var c=document.querySelector('input[name=booking_as]:checked').value==='company';var b=document.getElementById('company');b.classList.toggle('on',c);b.querySelectorAll('input').forEach(function(i){if(i.name!=='vat_number')i.required=c;});}
+var PR={en:{p:['€4,695 incl. VAT (early bird)','€5,195 incl. VAT'],c:['€4,250 excl. VAT (early bird)','€4,750 excl. VAT'],t:'Your price: '},nl:{p:['€4.695 incl. btw (early bird)','€5.195 incl. btw'],c:['€4.250 excl. btw (early bird)','€4.750 excl. btw'],t:'Jouw prijs: '}};
+function co(){var c=document.querySelector('input[name=booking_as]:checked').value==='company';var b=document.getElementById('company');b.classList.toggle('on',c);b.querySelectorAll('input').forEach(function(i){if(i.name!=='vat_number')i.required=c;});var L=PR[document.documentElement.lang],k=new Date()<new Date('2027-01-01T00:00:00+01:00')?0:1;document.getElementById('pricenote').textContent=L.t+(c?L.c[k]:L.p[k]);}
+co();
 if(/[?&]error=1/.test(location.search))document.getElementById('err').style.display='block';
 </script>
 <footer><div class="bar">
