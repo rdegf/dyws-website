@@ -30,7 +30,7 @@ $f = [
   'why' => para('why'), 'intention' => line('intention', 500), 'experience' => para('experience'),
   'concerns' => para('concerns'), 'other' => para('other'),
 ];
-$required = ['first_name','last_name','phone','street','postcode','city','country','discovery_call','why','intention'];
+$required = ['first_name','last_name','phone','street','postcode','city','country','discovery_call','why','intention','experience','concerns','other'];
 $ok = (bool)$email && yes('accept_terms') && yes('accept_binding') && yes('adult') && yes('privacy');
 foreach ($required as $r) { if ($f[$r] === '') { $ok = false; } }
 if ($f['booking_as'] === 'company' && ($f['company_name'] === '' || $f['company_address'] === '')) { $ok = false; }
