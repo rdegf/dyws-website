@@ -41,11 +41,11 @@ $name = $f['first_name'] . ' ' . $f['last_name'];
 $nl = $lang === 'nl';
 
 $L = $nl ? [
-  'Naam','E-mail','Telefoon','Adres','Boekt als','Particulier','Via werkgever','Bedrijf','Factuuradres bedrijf','Btw-nummer',
+  'Naam','E-mail','Telefoon','Adres','Boekt als','Particulier','Via werkgever of eigen bedrijf','Bedrijf','Factuuradres bedrijf','Btw-nummer',
   'Trail','Discovery call gehad','Hoe gehoord','Waarom deze trail','Intentie','Ervaring','Zorgen of angsten','Overig',
   'Akkoord reisvoorwaarden en standaardinformatieformulier','Bindende boekingsaanvraag begrepen','18 jaar of ouder','Akkoord privacy','Nieuwsbrief','Ingestuurd op','ja','nee'
 ] : [
-  'Name','E-mail','Phone','Address','Booking as','Private person','Through employer','Company','Company invoice address','VAT number',
+  'Name','E-mail','Phone','Address','Booking as','Private person','Through employer or own business','Company','Company invoice address','VAT number',
   'Trail','Had a discovery call','Heard about it via','Why this trail','Intention','Experience','Fears or concerns','Other',
   'Accepted travel conditions and standard information form','Understood binding booking request','18 or older','Privacy consent','Newsletter','Submitted on','yes','no'
 ];
