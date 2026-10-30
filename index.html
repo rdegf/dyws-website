@@ -34,6 +34,8 @@
 }
 
 /* site navigation: mobile menu */
+.bk-s{display:none}
+@media (max-width:374px){.site-nav [role="group"] [aria-current],.site-nav [role="group"] [aria-hidden]{display:none !important}}
 .site-nav{transition:background .25s ease, box-shadow .25s ease}
 .nav-toggle{display:none;align-items:center;justify-content:center;width:44px;height:44px;padding:0;border:0;background:none;color:#FAF7F1;cursor:pointer;border-radius:8px}
 .nav-toggle:focus-visible{outline:2px solid #E3B07A;outline-offset:2px}
@@ -44,14 +46,15 @@
 .site-nav.open .nav-toggle .bars::before{transform:translateY(7px) rotate(45deg)}
 .site-nav.open .nav-toggle .bars::after{transform:translateY(-7px) rotate(-45deg)}
 @media (max-width:860px){
- .site-nav{gap:8px 12px !important;padding-top:16px !important;padding-bottom:16px !important}
+ .site-nav{gap:8px 8px !important;padding-top:16px !important;padding-bottom:16px !important}
  .site-nav .logo{margin-right:auto}
  .site-nav .nav-right{display:contents !important}
  .site-nav .nav-toggle{display:inline-flex;order:3}
- .site-nav .nav-book{order:2;padding:0 16px !important;font-size:14px}
+ .site-nav .nav-book{order:2;padding:0 13px !important;font-size:14px}
  .site-nav .nav-links{display:none !important;order:10;flex-basis:100%;flex-direction:column;align-items:flex-start !important;gap:0 !important;padding:8px 0 4px;border-top:1px solid rgba(250,247,241,0.18)}
  .site-nav .nav-links a{display:flex;align-items:center;min-height:48px;font-size:17px}
- .site-nav [role="group"]{order:11;display:none !important;flex-basis:100%;padding-bottom:8px}
+ .site-nav [role="group"]{order:1;display:flex !important}
+ .bk-l{display:none}.bk-s{display:inline}
  .site-nav.open{background:rgba(27,30,25,0.96)}
  .site-nav.open .nav-links{display:flex !important}
  .site-nav.open [role="group"]{display:flex !important}
@@ -112,7 +115,7 @@ a{color:#9C5B22}a:hover{color:#7A4518}
 <a href="/stories/" style="color: #FAF7F1; text-decoration: none">Stories</a>
 </div>
 <div role="group" aria-label="Language" style="display: flex; align-items: center; gap: 2px; font-size: 14px; font-weight: 600; letter-spacing: 0.06em"><span aria-current="true" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 4px; color: #FAF7F1; text-decoration: underline; text-underline-offset: 5px">EN</span><span aria-hidden="true" style="color: rgba(250,247,241,0.45)">|</span><a href="nl/" lang="nl" hreflang="nl" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 4px; color: rgba(250,247,241,0.75); text-decoration: none">NL</a></div>
-<a class="nav-book" href="https://calendly.com/rdegaayfortman/discovery-call" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px; border: 1px solid rgba(250,247,241,0.7); border-radius: 999px; color: #FAF7F1; text-decoration: none; font-weight: 500">Book a call</a>
+<a class="nav-book" href="https://calendly.com/rdegaayfortman/discovery-call" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px; border: 1px solid rgba(250,247,241,0.7); border-radius: 999px; color: #FAF7F1; text-decoration: none; font-weight: 500"><span class="bk-l">Book a call</span><span class="bk-s">Book call</span></a>
 <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Menu"><span class="bars" aria-hidden="true"></span></button>
 </div>
 </nav>
