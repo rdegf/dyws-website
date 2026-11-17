@@ -1,3 +1,7 @@
 <Files "sender-config.php">
   Require all denied
 </Files>
+
+<Files "notion-config.php">
+  Require all denied
+</Files>

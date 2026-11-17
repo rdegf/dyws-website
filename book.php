@@ -1,6 +1,6 @@
 <?php
 // Booking form handler for discoveryourwildself.com (/book/ and /nl/boeken/).
-// E-mails the booking to Rick and a copy to the participant. Nothing is stored on the server.
+// E-mails the booking to Rick and a copy to the participant, and saves it to Rick's Notion (Bookings). Nothing is stored on the server.
 
 date_default_timezone_set('Europe/Amsterdam');
 $lang = (($_POST['lang'] ?? '') === 'nl') ? 'nl' : 'en';
@@ -71,9 +71,88 @@ $summary .= "\n{$L[10]}: 18-26 April 2027, Okavango Delta, Botswana\n{$L[11]}: {
 $from = "From: Discover Your Wild Self <website@discoveryourwildself.com>\r\nContent-Type: text/plain; charset=UTF-8\r\n";
 $sub = function($s) { return '=?UTF-8?B?' . base64_encode($s) . '?='; };
 
+// Save the booking to Notion (Bookings database, linked to Leads / Participants).
+// The key lives in notion-config.php, preferably one folder ABOVE public_html: <?php return ['token' => 'ntn_...'];
+// If Notion is unreachable or not set up, the booking still goes through by e-mail; Rick's e-mail then says so.
+$notionNote = 'Notion: not set up (notion-config.php not found).';
+$ncfg = null;
+foreach ([dirname(__DIR__) . '/notion-config.php', __DIR__ . '/notion-config.php'] as $nf) {
+  if (is_file($nf)) { $ncfg = include $nf; break; }
+}
+if (is_array($ncfg) && !empty($ncfg['token'])) {
+  $BOOKINGS_DB = $ncfg['bookings_db'] ?? '41bfe77e0997819988e7dfa063bbac5d';
+  $LEADS_DB    = $ncfg['leads_db'] ?? '83d7d8086cc047aeb4b3a404c6a63ead';
+  $notion = function($method, $path, $body) use ($ncfg) {
+    $ch = curl_init('https://api.notion.com/v1/' . $path);
+    curl_setopt_array($ch, [
+      CURLOPT_CUSTOMREQUEST => $method, CURLOPT_RETURNTRANSFER => true, CURLOPT_TIMEOUT => 10,
+      CURLOPT_HTTPHEADER => ['Authorization: Bearer ' . $ncfg['token'], 'Notion-Version: 2022-06-28', 'Content-Type: application/json'],
+      CURLOPT_POSTFIELDS => json_encode($body, JSON_UNESCAPED_UNICODE),
+    ]);
+    $res = curl_exec($ch); $code = curl_getinfo($ch, CURLINFO_HTTP_CODE); curl_close($ch);
+    return [$code, json_decode((string)$res, true)];
+  };
+  $txt = function($v) { $v = (string)$v; return ['rich_text' => $v === '' ? [] : [['text' => ['content' => mb_substr($v, 0, 2000)]]]]; };
+  $today = date('Y-m-d');
+  $company = $f['booking_as'] === 'company';
+  $amount = $company ? ($early ? 4250 : 4750) : ($early ? 4695 : 5195);
+
+  // Find the person in Leads / Participants by e-mail, or add them.
+  $leadId = null;
+  [$c, $r] = $notion('POST', "databases/$LEADS_DB/query", ['filter' => ['property' => 'Email', 'email' => ['equals' => $email]], 'page_size' => 1]);
+  if ($c === 200 && !empty($r['results'][0]['id'])) {
+    $leadId = $r['results'][0]['id'];
+    $notion('PATCH', "pages/$leadId", ['properties' => ['Last Contact' => ['date' => ['start' => $today]]]]);
+  } else {
+    [$c2, $r2] = $notion('POST', 'pages', ['parent' => ['database_id' => $LEADS_DB], 'properties' => [
+      'Name' => ['title' => [['text' => ['content' => $name]]]],
+      'Email' => ['email' => $email],
+      'Phone' => ['phone_number' => $f['phone'] ?: null],
+      'Last Contact' => ['date' => ['start' => $today]],
+      'Consent newsletter' => ['select' => ['name' => yes('newsletter') ? 'Yes' : 'No']],
+      'Notes' => $txt('Added automatically from the website booking form on ' . $now . '.'),
+    ]]);
+    if ($c2 === 200) { $leadId = $r2['id'] ?? null; }
+  }
+
+  $props = [
+    'Name' => ['title' => [['text' => ['content' => $name]]]],
+    'Status' => ['status' => ['name' => 'Request received']],
+    'Trail' => ['select' => ['name' => '18–26 April 2027']],
+    'Booked on' => ['date' => ['start' => date('c')]],
+    'Email' => ['email' => $email],
+    'Phone' => ['phone_number' => $f['phone'] ?: null],
+    'Address' => $txt("{$f['street']}, {$f['postcode']} {$f['city']}"),
+    'Country' => $txt($f['country']),
+    'Language' => ['select' => ['name' => $nl ? 'NL' : 'EN']],
+    'Booking as' => ['select' => ['name' => $company ? 'Business' : 'Private']],
+    'Company name' => $txt($company ? $f['company_name'] : ''),
+    'Company address' => $txt($company ? $f['company_address'] : ''),
+    'Company VAT number' => $txt($company ? $f['vat_number'] : ''),
+    'Price' => $txt($price),
+    'Total amount' => ['number' => $amount],
+    'Discovery call' => $txt($f['discovery_call']),
+    'How they heard' => $txt($f['heard']),
+    'Why this trail' => $txt($f['why']),
+    'Intention' => $txt($f['intention']),
+    'Experience' => $txt($f['experience']),
+    'Concerns' => $txt($f['concerns']),
+    'Other' => $txt($f['other']),
+    'Newsletter' => ['checkbox' => yes('newsletter')],
+    'Terms and conditions accepted' => ['checkbox' => yes('accept_terms') && yes('accept_binding')],
+    'Next action' => $txt('Confirm or decline in writing within 5 working days'),
+    'Next action date' => ['date' => ['start' => date('Y-m-d', strtotime('+7 days'))]],
+  ];
+  if ($leadId) { $props['Participant'] = ['relation' => [['id' => $leadId]]]; }
+  [$c3, $r3] = $notion('POST', 'pages', ['parent' => ['database_id' => $BOOKINGS_DB], 'properties' => $props]);
+  $notionNote = $c3 === 200
+    ? 'Notion: saved to Bookings' . (!empty($r3['url']) ? ' — ' . $r3['url'] : '') . ($leadId ? '' : ' (could not link to Leads / Participants)')
+    : 'Notion: NOT saved (error ' . $c3 . ': ' . ($r3['message'] ?? 'no response') . '). Please add this booking by hand.';
+}
+
 // To Rick
 $toRick = @mail('hello@discoveryourwildself.com', $sub("New booking: $name (18-26 April 2027)"),
-  "New binding booking request via the website (" . ($nl ? 'Dutch' : 'English') . " form).\nConfirm or decline in writing within 5 working days.\n\n" . $summary,
+  "New binding booking request via the website (" . ($nl ? 'Dutch' : 'English') . " form).\nConfirm or decline in writing within 5 working days.\n" . $notionNote . "\n\n" . $summary,
   $from . "Reply-To: $email\r\n");
 
 // Copy to participant
